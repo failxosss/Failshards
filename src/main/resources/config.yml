@@ -776,3 +776,74 @@ abilities:
       duration: 15
       amplifier: 1
       radius: 5
+
+# Model animation settings (one active scene per player).
+visual-effects:
+  enabled: true
+  vanilla-particles: false
+  orbit-count: 5
+  radius: 1.45
+  rotation-speed: 1.7
+  view-range: 0.75
+  max-active-players: 30
+  shards:
+    air:
+      enabled: true
+    archer:
+      enabled: true
+    arsenal:
+      enabled: true
+    cosmic:
+      enabled: true
+    crystal:
+      enabled: true
+    dragon:
+      enabled: true
+    earth:
+      enabled: true
+    ender:
+      enabled: true
+    fire:
+      enabled: true
+    frost:
+      enabled: true
+    glitched:
+      enabled: true
+    gravity:
+      enabled: true
+    guardian:
+      enabled: true
+    health:
+      enabled: true
+    lava:
+      enabled: true
+    moon:
+      enabled: true
+    nature:
+      enabled: true
+    ocean:
+      enabled: true
+    phantom:
+      enabled: true
+    poison:
+      enabled: true
+    shadow:
+      enabled: true
+    soul:
+      enabled: true
+    speed:
+      enabled: true
+    strength:
+      enabled: true
+    sun:
+      enabled: true
+    thunder:
+      enabled: true
+    time:
+      enabled: true
+    totem:
+      enabled: true
+    vampire:
+      enabled: true
+    water:
+      enabled: true

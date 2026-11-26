@@ -17,9 +17,12 @@ public final class ShardAbilities implements Listener {
     private final ShardManager manager;
     private final Map<UUID,long[]> cooldown = new HashMap<>();
     private final Set<Arrow> arrows = new HashSet<>();
+    private final ModelEffects visuals;
     private final Random random = new Random();
     public ShardAbilities(FailShards plugin, ShardManager manager) {
         this.plugin=plugin; this.manager=manager;
+        visuals=new ModelEffects(plugin,manager);
+        Bukkit.getPluginManager().registerEvents(visuals,plugin);
         Bukkit.getScheduler().runTaskTimer(plugin, () -> {
             if (!plugin.getConfig().getBoolean("abilities.hud",true)) return;
             for(Player p:Bukkit.getOnlinePlayers()) {
@@ -47,7 +50,7 @@ public final class ShardAbilities implements Listener {
     private void animate(Player p, World w, int frames, long period, IntConsumer action) {
         new BukkitRunnable(){int i=0; public void run(){if(i>=frames||!allowed(p)||!p.getWorld().equals(w)){cancel();return;} action.accept(i++);}}.runTaskTimer(plugin,0L,period);
     }
-    private void fx(Location l,Particle particle,int count) { l.getWorld().spawnParticle(particle,l,count,.07,.07,.07,0); }
+    private void fx(Location l,Particle particle,int count) { if(visuals.particles()) l.getWorld().spawnParticle(particle,l,count,.07,.07,.07,0); }
     private Location at(Location l,double x,double y,double z){return l.clone().add(x,y,z);}
     private void ring(Location l,Particle particle,double radius,double y,int points,double spin){for(int i=0;i<points;i++){double a=spin+i*Math.PI*2/points;fx(at(l,Math.cos(a)*radius,y,Math.sin(a)*radius),particle,1);}}
     private void effect(LivingEntity p,PotionEffectType type,int ticks,int amp){p.addPotionEffect(new PotionEffect(type,ticks,amp));}
@@ -58,7 +61,7 @@ public final class ShardAbilities implements Listener {
     private Location forward(Player p,double d){Vector v=p.getLocation().getDirection().setY(0);if(v.lengthSquared()>0.001)v.normalize();return p.getLocation().add(v.multiply(d));}
     private void arrow(Player p,Location l,Vector v){Arrow a=l.getWorld().spawnArrow(l,v,1.4f,0f);a.setShooter(p);a.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);arrows.add(a);Bukkit.getScheduler().runTaskLater(plugin,()->{a.remove();arrows.remove(a);},100L);}
     @EventHandler(ignoreCancelled=true) public void arrowHit(org.bukkit.event.entity.EntityDamageByEntityEvent e){if(e.getDamager() instanceof Arrow a&&arrows.contains(a)&&a.getShooter() instanceof Player p&&ally(p,e.getEntity()))e.setCancelled(true);}
-    public void shutdown(){for(Arrow a:arrows)a.remove();arrows.clear();}
+    public void shutdown(){visuals.shutdown();for(Arrow a:arrows)a.remove();arrows.clear();}
     private void activate(Player p,Shard s,int slot){
         boolean ult=slot==1;
         if(s.key().equals("totem") && slot==0)return;
@@ -70,6 +73,8 @@ public final class ShardAbilities implements Listener {
         int seconds=plugin.getConfig().getInt("abilities."+s.key()+"."+(slot==2?"third-cooldown":ult?"ultimate-cooldown":"active-cooldown"),slot==2?90:ult?150:45);
         t[slot]=now+1000L*Math.max(1,seconds); Location l=p.getLocation();World w=p.getWorld();
         p.sendActionBar(Component.text(s.name()+" • "+manager.text(slot==2?"special":ult?"ultimate":"active")));w.playSound(l,"minecraft:block.amethyst_block.chime",1f,1f);
+        int visualTicks=20* Math.max(1,Math.min(30,plugin.getConfig().getInt("abilities."+s.key()+".slot-"+(slot+1)+".duration",slot==1?8:slot==2?5:6)));
+        visuals.play(p,s.key(),slot,visualTicks);
         if(plugin.getConfig().isConfigurationSection("abilities."+s.key()+".slot-"+(slot+1))){configured(p,s,slot);return;}
         if(slot==2){thirdAbility(p,s,l,w);return;}
         switch(s.key()){
@@ -115,7 +120,7 @@ public final class ShardAbilities implements Listener {
         effect(p,PotionEffectType.REGENERATION,20*Math.max(1,plugin.getConfig().getInt("abilities.totem.regeneration-seconds",10)),1);
         effect(p,PotionEffectType.ABSORPTION,20*Math.max(1,plugin.getConfig().getInt("abilities.totem.absorption-seconds",5)),1);
         effect(p,PotionEffectType.FIRE_RESISTANCE,20*Math.max(1,plugin.getConfig().getInt("abilities.totem.fire-resistance-seconds",10)),0);
-        p.playEffect(EntityEffect.TOTEM_RESURRECT);manager.msg(p,"totem-activated");
+        visuals.play(p,"totem",0,100);p.playEffect(EntityEffect.TOTEM_RESURRECT);manager.msg(p,"totem-activated");
     }
     private void configured(Player p,Shard s,int slot){
         String k="abilities."+s.key()+".slot-"+(slot+1)+".";var c=plugin.getConfig();

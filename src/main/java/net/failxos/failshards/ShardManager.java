@@ -231,6 +231,12 @@ public final class ShardManager {
         return null;
     }
 
+    public ItemStack visualItem(String id) {
+        if (iaGetInstance == null) return null;
+        try { Object cs = iaGetInstance.invoke(null, id); return cs == null ? null : ((ItemStack) iaGetItemStack.invoke(cs)).clone(); }
+        catch (Exception ex) { return null; }
+    }
+
     public ItemStack createItem(Shard s) {
         if (iaGetInstance != null) {
             try {
