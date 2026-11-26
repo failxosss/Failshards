@@ -1,0 +1,18 @@
+shard-drop-denied: Du kannst deinen Shard nicht fallen lassen!
+totem-activated: Dein Totem hat dich gerettet!
+ready: BEREIT
+cooldown: Abklingzeit
+active: AKTIV
+ultimate: ULTIMATIV
+special: SPEZIAL
+received: Du hast <shard> erhalten!
+given: <player> erhielt <shard>.
+reloaded: Konfiguration neu geladen.
+unknown-shard: Unbekannter Shard.
+unknown-player: Spieler nicht gefunden.
+item-missing: Item konnte nicht erstellt werden.
+usage: /failshards give/random/reload
+automatic: Automatic
+right: Right click
+shift-right: Shift + right
+shift-left: Shift + left

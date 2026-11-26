@@ -1,0 +1,18 @@
+shard-drop-denied: シャードを捨てられません！
+totem-activated: トーテムに救われました！
+ready: 準備完了
+cooldown: クールダウン
+active: アクティブ
+ultimate: 必殺技
+special: 特殊
+received: <shard> を入手！
+given: <player> が <shard> を入手。
+reloaded: 設定を再読み込みしました。
+unknown-shard: 不明なシャード。
+unknown-player: プレイヤーが見つかりません。
+item-missing: アイテムを作成できません。
+usage: /failshards give/random/reload
+automatic: Automatic
+right: Right click
+shift-right: Shift + right
+shift-left: Shift + left

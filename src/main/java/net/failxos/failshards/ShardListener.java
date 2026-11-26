@@ -101,4 +101,10 @@ public final class ShardListener implements Listener {
             e.setCancelled(true);
         }
     }
+    @EventHandler(priority=EventPriority.HIGHEST, ignoreCancelled=true)
+    public void onDrop(org.bukkit.event.player.PlayerDropItemEvent e) {
+        if(plugin.getConfig().getBoolean("prevent-shard-drop",true) && manager.shardOf(e.getItemDrop().getItemStack())!=null){
+            e.setCancelled(true); manager.msg(e.getPlayer(),"shard-drop-denied");
+        }
+    }
 }

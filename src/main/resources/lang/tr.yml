@@ -1,0 +1,18 @@
+shard-drop-denied: Parçanı atamazsın!
+totem-activated: Totem seni kurtardı!
+ready: HAZIR
+cooldown: Bekleme
+active: AKTİF
+ultimate: ULTİ
+special: ÖZEL
+received: <shard> aldın!
+given: <player> <shard> aldı.
+reloaded: Yapılandırma yenilendi.
+unknown-shard: Bilinmeyen parça.
+unknown-player: Oyuncu bulunamadı.
+item-missing: Eşya oluşturulamadı.
+usage: /failshards give/random/reload
+automatic: Automatic
+right: Right click
+shift-right: Shift + right
+shift-left: Shift + left

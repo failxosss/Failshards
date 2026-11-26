@@ -1,0 +1,18 @@
+shard-drop-denied: لا يمكنك رمي الشظية!
+totem-activated: أنقذك الطوطم!
+ready: جاهز
+cooldown: وقت الانتظار
+active: نشط
+ultimate: نهائي
+special: خاص
+received: حصلت على <shard>!
+given: حصل <player> على <shard>.
+reloaded: تم تحميل الإعدادات.
+unknown-shard: شظية مجهولة.
+unknown-player: اللاعب غير موجود.
+item-missing: تعذر إنشاء العنصر.
+usage: /failshards give/random/reload
+automatic: Automatic
+right: Right click
+shift-right: Shift + right
+shift-left: Shift + left

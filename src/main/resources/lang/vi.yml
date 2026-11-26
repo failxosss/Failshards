@@ -1,0 +1,18 @@
+shard-drop-denied: Bạn không thể vứt mảnh!
+totem-activated: Totem đã cứu bạn!
+ready: SẴN SÀNG
+cooldown: Hồi chiêu
+active: CHỦ ĐỘNG
+ultimate: TỐI THƯỢNG
+special: ĐẶC BIỆT
+received: Bạn nhận <shard>!
+given: <player> nhận <shard>.
+reloaded: Đã tải lại cấu hình.
+unknown-shard: Mảnh không xác định.
+unknown-player: Không tìm thấy người chơi.
+item-missing: Không thể tạo vật phẩm.
+usage: /failshards give/random/reload
+automatic: Automatic
+right: Right click
+shift-right: Shift + right
+shift-left: Shift + left

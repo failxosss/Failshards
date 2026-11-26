@@ -1,77 +1,143 @@
-# FailShards by Failxos
-# When a shard is active: INVENTORY (any inventory slot), HOTBAR (hotbar + offhand), HAND (held in hand)
+language: en
+prevent-shard-drop: true
 mode: INVENTORY
-
 first-join:
   enabled: true
-  # true = only players joining for the first time
   only-new-players: true
-
-# Shards are retained on death (other items drop)
 keep-on-death: true
-
-# Dropped shards are protected from fire, lava, explosions and despawning
 protect-dropped-items: true
-
 messages:
-  received: "<gray>You received <gold><shard></gold><gray>!"
-  given: "<green>Player <player> received <shard>."
-  reloaded: "<green>Configuration reloaded."
-  unknown-shard: "<red>Unknown shard."
-  unknown-player: "<red>Player not found."
-  item-missing: "<red>Could not create item. Is ItemsAdder loaded and its resource pack installed?"
-  usage: "<gray>/failshards <give <player> <shard>|random <player>|reload>"
-
-# effects:    "effect:amplifier" (0 = I, 1 = II ...) - Minecraft effect names
-# attributes: "attribute:value" (added to base value) - e.g. max_health:4 = +2 hearts
-# item:       ItemsAdder namespaced ID
+  shard-drop-denied: ''
+  totem-activated: ''
+  received: ''
+  given: ''
+  reloaded: ''
+  unknown-shard: ''
+  unknown-player: ''
+  item-missing: ''
+  usage: ''
 shards:
   strength:
-    name: "Strength Shard"
-    item: "failshards:strength_shard"
-    effects: ["strength:0"]
+    name: Strength Shard
+    item: failshards:strength_shard
+    effects:
+    - strength:0
   speed:
-    name: "Speed Shard"
-    item: "failshards:speed_shard"
-    effects: ["speed:1"]
+    name: Speed Shard
+    item: failshards:speed_shard
+    effects:
+    - speed:1
   health:
-    name: "Health Shard"
-    item: "failshards:health_shard"
-    attributes: ["max_health:4"]
+    name: Health Shard
+    item: failshards:health_shard
+    attributes:
+    - max_health:4
   fire:
-    name: "Fire Shard"
-    item: "failshards:fire_shard"
-    effects: ["fire_resistance:0"]
+    name: Fire Shard
+    item: failshards:fire_shard
+    effects:
+    - fire_resistance:0
     ignite-on-hit-ticks: 80
   water:
-    name: "Water Shard"
-    item: "failshards:water_shard"
-    effects: ["water_breathing:0", "dolphins_grace:0"]
+    name: Water Shard
+    item: failshards:water_shard
+    effects:
+    - water_breathing:0
+    - dolphins_grace:0
   air:
-    name: "Air Shard"
-    item: "failshards:air_shard"
-    effects: ["slow_falling:0", "jump_boost:1"]
+    name: Air Shard
+    item: failshards:air_shard
+    effects:
+    - slow_falling:0
+    - jump_boost:1
   guardian:
-    name: "Guardian Shard"
-    item: "failshards:guardian_shard"
-    effects: ["resistance:0"]
+    name: Guardian Shard
+    item: failshards:guardian_shard
+    effects:
+    - resistance:0
   arsenal:
-    name: "Arsenal Shard"
-    item: "failshards:arsenal_shard"
-    attributes: ["attack_damage:2"]
+    name: Arsenal Shard
+    item: failshards:arsenal_shard
+    attributes:
+    - attack_damage:2
   soul:
-    name: "Soul Shard"
-    item: "failshards:soul_shard"
-    effects: ["regeneration:0"]
+    name: Soul Shard
+    item: failshards:soul_shard
+    effects:
+    - regeneration:0
   glitched:
-    name: "Glitched Shard"
-    item: "failshards:glitched_shard"
-    # Grants a random effect from the list every X seconds for Y seconds
-    random-effects: ["speed:1", "jump_boost:1", "night_vision:0", "invisibility:0", "haste:1", "glowing:0", "slow_falling:0"]
+    name: Glitched Shard
+    item: failshards:glitched_shard
+    random-effects:
+    - speed:1
+    - jump_boost:1
+    - night_vision:0
+    - invisibility:0
+    - haste:1
+    - glowing:0
+    - slow_falling:0
     random-interval: 20
     random-duration: 15
-
-# Active: right click; ultimate: Shift + right click; third: Shift + left click.
+  totem:
+    name: Totem Shard
+    item: failshards:totem_shard
+  frost:
+    name: Frost Shard
+    item: failshards:frost_shard
+  thunder:
+    name: Thunder Shard
+    item: failshards:thunder_shard
+  shadow:
+    name: Shadow Shard
+    item: failshards:shadow_shard
+  ender:
+    name: Ender Shard
+    item: failshards:ender_shard
+  earth:
+    name: Earth Shard
+    item: failshards:earth_shard
+  poison:
+    name: Poison Shard
+    item: failshards:poison_shard
+  vampire:
+    name: Vampire Shard
+    item: failshards:vampire_shard
+  archer:
+    name: Archer Shard
+    item: failshards:archer_shard
+  gravity:
+    name: Gravity Shard
+    item: failshards:gravity_shard
+  crystal:
+    name: Crystal Shard
+    item: failshards:crystal_shard
+  time:
+    name: Time Shard
+    item: failshards:time_shard
+  nature:
+    name: Nature Shard
+    item: failshards:nature_shard
+  lava:
+    name: Lava Shard
+    item: failshards:lava_shard
+  moon:
+    name: Moon Shard
+    item: failshards:moon_shard
+  sun:
+    name: Sun Shard
+    item: failshards:sun_shard
+  ocean:
+    name: Ocean Shard
+    item: failshards:ocean_shard
+  phantom:
+    name: Phantom Shard
+    item: failshards:phantom_shard
+  dragon:
+    name: Dragon Shard
+    item: failshards:dragon_shard
+  cosmic:
+    name: Cosmic Shard
+    item: failshards:cosmic_shard
 abilities:
   enabled: true
   hud: true
@@ -126,3 +192,587 @@ abilities:
     active-cooldown: 60
     ultimate-cooldown: 180
     third-cooldown: 90
+  totem:
+    enabled: true
+    active-cooldown: 3600
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Second Life
+      effect: regeneration
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Divine Shield
+      effect: resistance
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: Healing Aura
+      effect: regeneration
+      target: self
+      duration: 15
+      amplifier: 1
+      radius: 5
+    health: 8
+    absorption-seconds: 5
+    regeneration-seconds: 10
+    fire-resistance-seconds: 10
+  frost:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Ice Armor
+      effect: resistance
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Ice Storm
+      effect: slowness
+      target: nearby
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: Freeze
+      effect: weakness
+      target: nearby
+      duration: 15
+      amplifier: 1
+      radius: 5
+  thunder:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Electric Rush
+      effect: speed
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Thunderstorm
+      effect: glowing
+      target: nearby
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: Static Field
+      effect: slowness
+      target: nearby
+      duration: 15
+      amplifier: 1
+      radius: 5
+  shadow:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Vanish
+      effect: invisibility
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Darkness Field
+      effect: darkness
+      target: nearby
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: Shadow Sprint
+      effect: speed
+      target: self
+      duration: 15
+      amplifier: 1
+      radius: 5
+  ender:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Ender Escape
+      effect: speed
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Ender Shield
+      effect: resistance
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: Void Sight
+      effect: night_vision
+      target: self
+      duration: 15
+      amplifier: 1
+      radius: 5
+  earth:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Stone Armor
+      effect: resistance
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Earth Tremor
+      effect: slowness
+      target: nearby
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: Mining Power
+      effect: haste
+      target: self
+      duration: 15
+      amplifier: 1
+      radius: 5
+  poison:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Antidote
+      effect: regeneration
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Poison Cloud
+      effect: poison
+      target: nearby
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: Venom
+      effect: weakness
+      target: nearby
+      duration: 15
+      amplifier: 1
+      radius: 5
+  vampire:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Night Vision
+      effect: night_vision
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Life Drain
+      effect: weakness
+      target: nearby
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: Blood Shield
+      effect: absorption
+      target: self
+      duration: 15
+      amplifier: 1
+      radius: 5
+  archer:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Eagle Sight
+      effect: night_vision
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Arrow Focus
+      effect: strength
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: Archer Sprint
+      effect: speed
+      target: self
+      duration: 15
+      amplifier: 1
+      radius: 5
+  gravity:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Feather Fall
+      effect: slow_falling
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Gravity Field
+      effect: levitation
+      target: nearby
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: High Jump
+      effect: jump_boost
+      target: self
+      duration: 15
+      amplifier: 1
+      radius: 5
+  crystal:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Crystal Armor
+      effect: resistance
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Crystal Flash
+      effect: blindness
+      target: nearby
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: Crystal Heart
+      effect: absorption
+      target: self
+      duration: 15
+      amplifier: 1
+      radius: 5
+  time:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Time Boost
+      effect: haste
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Slow Motion
+      effect: slowness
+      target: nearby
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: Time Shield
+      effect: resistance
+      target: self
+      duration: 15
+      amplifier: 1
+      radius: 5
+  nature:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Growth
+      effect: regeneration
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Roots
+      effect: slowness
+      target: nearby
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: Nature Heal
+      effect: instant_health
+      target: self
+      duration: 15
+      amplifier: 1
+      radius: 5
+  lava:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Heat Shield
+      effect: fire_resistance
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Magma Field
+      effect: weakness
+      target: nearby
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: Magma Power
+      effect: strength
+      target: self
+      duration: 15
+      amplifier: 1
+      radius: 5
+  moon:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Moonlight
+      effect: night_vision
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Lunar Shield
+      effect: absorption
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: Night Boost
+      effect: speed
+      target: self
+      duration: 15
+      amplifier: 1
+      radius: 5
+  sun:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Solar Heal
+      effect: instant_health
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Solar Flare
+      effect: glowing
+      target: nearby
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: Sun Aura
+      effect: regeneration
+      target: self
+      duration: 15
+      amplifier: 1
+      radius: 5
+  ocean:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Ocean Speed
+      effect: dolphins_grace
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Bubble Shield
+      effect: water_breathing
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: Tidal Pressure
+      effect: slowness
+      target: nearby
+      duration: 15
+      amplifier: 1
+      radius: 5
+  phantom:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Ghost Step
+      effect: invisibility
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Phantom Lift
+      effect: levitation
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: Vanish
+      effect: slow_falling
+      target: self
+      duration: 15
+      amplifier: 1
+      radius: 5
+  dragon:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Dragon Power
+      effect: strength
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Dragon Roar
+      effect: weakness
+      target: nearby
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: Dragon Wings
+      effect: slow_falling
+      target: self
+      duration: 15
+      amplifier: 1
+      radius: 5
+  cosmic:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 120
+    third-cooldown: 90
+    slot-1:
+      enabled: true
+      name: Star Speed
+      effect: speed
+      target: self
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-2:
+      enabled: true
+      name: Cosmic Field
+      effect: levitation
+      target: nearby
+      duration: 10
+      amplifier: 1
+      radius: 5
+    slot-3:
+      enabled: true
+      name: Cosmic Shield
+      effect: absorption
+      target: self
+      duration: 15
+      amplifier: 1
+      radius: 5

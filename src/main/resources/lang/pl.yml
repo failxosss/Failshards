@@ -1,0 +1,18 @@
+shard-drop-denied: Nie możesz wyrzucić odłamka!
+totem-activated: Totem cię uratował!
+ready: GOTOWE
+cooldown: Odnowienie
+active: AKTYWNA
+ultimate: ULTIMATE
+special: SPECJALNA
+received: Otrzymano <shard>!
+given: <player> otrzymał <shard>.
+reloaded: Przeładowano konfigurację.
+unknown-shard: Nieznany odłamek.
+unknown-player: Nie znaleziono gracza.
+item-missing: Nie można utworzyć przedmiotu.
+usage: /failshards give/random/reload
+automatic: Automatic
+right: Right click
+shift-right: Shift + right
+shift-left: Shift + left

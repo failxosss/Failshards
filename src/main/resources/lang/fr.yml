@@ -1,0 +1,18 @@
+shard-drop-denied: Tu ne peux pas jeter ton cristal !
+totem-activated: Ton totem t’a sauvé !
+ready: PRÊT
+cooldown: Recharge
+active: ACTIVE
+ultimate: ULTIME
+special: SPÉCIALE
+received: Tu as reçu <shard> !
+given: <player> a reçu <shard>.
+reloaded: Configuration rechargée.
+unknown-shard: Cristal inconnu.
+unknown-player: Joueur introuvable.
+item-missing: Objet impossible à créer.
+usage: /failshards give/random/reload
+automatic: Automatic
+right: Right click
+shift-right: Shift + right
+shift-left: Shift + left

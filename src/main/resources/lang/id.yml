@@ -1,0 +1,18 @@
+shard-drop-denied: Kamu tidak bisa membuang shard!
+totem-activated: Totem menyelamatkanmu!
+ready: SIAP
+cooldown: Jeda
+active: AKTIF
+ultimate: ULTIMAT
+special: KHUSUS
+received: Kamu mendapat <shard>!
+given: <player> mendapat <shard>.
+reloaded: Konfigurasi dimuat ulang.
+unknown-shard: Shard tidak dikenal.
+unknown-player: Pemain tidak ditemukan.
+item-missing: Gagal membuat item.
+usage: /failshards give/random/reload
+automatic: Automatic
+right: Right click
+shift-right: Shift + right
+shift-left: Shift + left

@@ -1,0 +1,18 @@
+shard-drop-denied: Нельзя выбросить осколок!
+totem-activated: Тотем спас тебя!
+ready: ГОТОВО
+cooldown: Перезарядка
+active: АКТИВНАЯ
+ultimate: УЛЬТА
+special: ОСОБАЯ
+received: Ты получил <shard>!
+given: <player> получил <shard>.
+reloaded: Конфигурация обновлена.
+unknown-shard: Неизвестный осколок.
+unknown-player: Игрок не найден.
+item-missing: Не удалось создать предмет.
+usage: /failshards give/random/reload
+automatic: Automatic
+right: Right click
+shift-right: Shift + right
+shift-left: Shift + left

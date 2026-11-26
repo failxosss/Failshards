@@ -1,0 +1,18 @@
+shard-drop-denied: Не можна викинути уламок!
+totem-activated: Тотем врятував тебе!
+ready: ГОТОВО
+cooldown: Перезарядка
+active: АКТИВНА
+ultimate: УЛЬТА
+special: ОСОБЛИВА
+received: Ти отримав <shard>!
+given: <player> отримав <shard>.
+reloaded: Конфігурацію оновлено.
+unknown-shard: Невідомий уламок.
+unknown-player: Гравця не знайдено.
+item-missing: Не вдалося створити предмет.
+usage: /failshards give/random/reload
+automatic: Automatic
+right: Right click
+shift-right: Shift + right
+shift-left: Shift + left

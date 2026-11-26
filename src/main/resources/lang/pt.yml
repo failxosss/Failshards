@@ -1,0 +1,18 @@
+shard-drop-denied: Não podes largar o fragmento!
+totem-activated: O teu totem salvou-te!
+ready: PRONTO
+cooldown: Recarga
+active: ATIVA
+ultimate: SUPREMA
+special: ESPECIAL
+received: Recebeste <shard>!
+given: <player> recebeu <shard>.
+reloaded: Configuração recarregada.
+unknown-shard: Fragmento desconhecido.
+unknown-player: Jogador não encontrado.
+item-missing: Não foi possível criar o item.
+usage: /failshards give/random/reload
+automatic: Automatic
+right: Right click
+shift-right: Shift + right
+shift-left: Shift + left

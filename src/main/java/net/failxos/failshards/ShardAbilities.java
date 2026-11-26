@@ -25,11 +25,11 @@ public final class ShardAbilities implements Listener {
             for(Player p:Bukkit.getOnlinePlayers()) {
                 Shard s=held(p); if(s==null) continue;
                 long[] t=cooldown.getOrDefault(p.getUniqueId(),new long[3]);
-                p.sendActionBar(Component.text(s.name()+" | Right click: "+remaining(t[0])+" | Shift+right: "+remaining(t[1])+" | Shift+left: "+remaining(t[2])));
+                p.sendActionBar(Component.text(s.name()+" | "+manager.text(s.key().equals("totem")?"automatic":"right")+": "+remaining(s.key().equals("totem")?totemEnd(p):t[0])+" | "+manager.text("shift-right")+": "+remaining(t[1])+" | "+manager.text("shift-left")+": "+remaining(t[2])));
             }
         },20L,20L);
     }
-    private String remaining(long end) { long s=Math.max(0,(end-System.currentTimeMillis()+999)/1000); return s==0?"READY":s+"s"; }
+    private String remaining(long end) { long s=Math.max(0,(end-System.currentTimeMillis()+999)/1000); return s==0?manager.text("ready"):s+"s"; }
     private Shard held(Player p) { Shard s=manager.shardOf(p.getInventory().getItemInMainHand()); return s!=null?s:manager.shardOf(p.getInventory().getItemInOffHand()); }
     @EventHandler
     public void interact(PlayerInteractEvent e) {
@@ -61,13 +61,16 @@ public final class ShardAbilities implements Listener {
     public void shutdown(){for(Arrow a:arrows)a.remove();arrows.clear();}
     private void activate(Player p,Shard s,int slot){
         boolean ult=slot==1;
+        if(s.key().equals("totem") && slot==0)return;
+        if(!plugin.getConfig().getBoolean("abilities."+s.key()+".slot-"+(slot+1)+".enabled",true))return;
         if(!allowed(p)||!plugin.getConfig().getBoolean("abilities.enabled",true))return;
         if(!plugin.getConfig().getBoolean("abilities."+s.key()+".enabled",true))return;
         long now=System.currentTimeMillis();long[] t=cooldown.computeIfAbsent(p.getUniqueId(),k->new long[3]);
-        if(t[slot]>now){p.sendActionBar(Component.text("Cooldown: "+remaining(t[slot])));return;}
+        if(t[slot]>now){p.sendActionBar(Component.text(manager.text("cooldown")+": "+remaining(t[slot])));return;}
         int seconds=plugin.getConfig().getInt("abilities."+s.key()+"."+(slot==2?"third-cooldown":ult?"ultimate-cooldown":"active-cooldown"),slot==2?90:ult?150:45);
         t[slot]=now+1000L*Math.max(1,seconds); Location l=p.getLocation();World w=p.getWorld();
-        p.sendActionBar(Component.text(s.name()+" • "+(slot==2?"SPECIAL":ult?"ULTIMATE":"ACTIVE")));w.playSound(l,"minecraft:block.amethyst_block.chime",1f,1f);
+        p.sendActionBar(Component.text(s.name()+" • "+manager.text(slot==2?"special":ult?"ultimate":"active")));w.playSound(l,"minecraft:block.amethyst_block.chime",1f,1f);
+        if(plugin.getConfig().isConfigurationSection("abilities."+s.key()+".slot-"+(slot+1))){configured(p,s,slot);return;}
         if(slot==2){thirdAbility(p,s,l,w);return;}
         switch(s.key()){
             case "strength" -> {if(!ult){effect(p,PotionEffectType.STRENGTH,160,1);animate(p,w,8,3,i->ring(p.getLocation(),Particle.CRIT,1.2,1,16,i));}else{animate(p,w,10,2,i->ring(l,Particle.CRIT,.5+i*.55,.4,24,i));for(var e:targets(p,l,5)){e.damage(4,p);push(e,l,1.1,.45);}}}
@@ -96,5 +99,29 @@ public final class ShardAbilities implements Listener {
             case "health" -> {for(Player q:w.getPlayers())if(ally(p,q)&&q.getLocation().distanceSquared(l)<=25)effect(q,PotionEffectType.ABSORPTION,300,0);animate(p,w,15,4,i->ring(l,Particle.HEART,4,.5,12,i*.3));}
             case "guardian" -> {effect(p,PotionEffectType.ABSORPTION,200,1);animate(p,w,25,4,i->ring(p.getLocation(),Particle.END_ROD,1.5,1,20,i*.4));}
         }
+    }
+    private long totemEnd(Player p){return p.getPersistentDataContainer().getOrDefault(new NamespacedKey(plugin,"totem_end"),org.bukkit.persistence.PersistentDataType.LONG,0L);}
+    @EventHandler(priority=EventPriority.HIGHEST,ignoreCancelled=true)
+    public void rescue(org.bukkit.event.entity.EntityDamageEvent e){
+        if(!(e.getEntity() instanceof Player p)||!allowed(p)||e.getFinalDamage()<p.getHealth())return;
+        if(e.getCause()==org.bukkit.event.entity.EntityDamageEvent.DamageCause.VOID)return;
+        if(!plugin.getConfig().getBoolean("abilities.enabled",true)||!plugin.getConfig().getBoolean("abilities.totem.enabled",true)||!plugin.getConfig().getBoolean("abilities.totem.slot-1.enabled",true))return;
+        if(manager.activeShards(p).stream().noneMatch(s->s.key().equals("totem"))||totemEnd(p)>System.currentTimeMillis())return;
+        if(p.getInventory().getItemInMainHand().getType()==Material.TOTEM_OF_UNDYING||p.getInventory().getItemInOffHand().getType()==Material.TOTEM_OF_UNDYING)return;
+        e.setCancelled(true);
+        p.getPersistentDataContainer().set(new NamespacedKey(plugin,"totem_end"),org.bukkit.persistence.PersistentDataType.LONG,System.currentTimeMillis()+1000L*Math.max(0,plugin.getConfig().getInt("abilities.totem.active-cooldown",3600)));
+        p.setHealth(Math.min(p.getMaxHealth(),Math.max(1,plugin.getConfig().getDouble("abilities.totem.health",8))));
+        p.setFireTicks(0); p.setFallDistance(0);
+        effect(p,PotionEffectType.REGENERATION,20*Math.max(1,plugin.getConfig().getInt("abilities.totem.regeneration-seconds",10)),1);
+        effect(p,PotionEffectType.ABSORPTION,20*Math.max(1,plugin.getConfig().getInt("abilities.totem.absorption-seconds",5)),1);
+        effect(p,PotionEffectType.FIRE_RESISTANCE,20*Math.max(1,plugin.getConfig().getInt("abilities.totem.fire-resistance-seconds",10)),0);
+        p.playEffect(EntityEffect.TOTEM_RESURRECT);manager.msg(p,"totem-activated");
+    }
+    private void configured(Player p,Shard s,int slot){
+        String k="abilities."+s.key()+".slot-"+(slot+1)+".";var c=plugin.getConfig();
+        var type=PotionEffectType.getByKey(NamespacedKey.minecraft(c.getString(k+"effect","speed")));if(type==null)return;
+        int ticks=20*Math.max(1,Math.min(600,c.getInt(k+"duration",10)));int amp=Math.max(0,Math.min(10,c.getInt(k+"amplifier",1)));double r=Math.max(1,Math.min(16,c.getDouble(k+"radius",5)));Location l=p.getLocation();
+        if(c.getString(k+"target","self").equals("nearby")){for(var v:targets(p,l,r))effect(v,type,ticks,amp);}else effect(p,type,ticks,amp);
+        animate(p,p.getWorld(),12,4,i->ring(p.getLocation(),Particle.END_ROD,Math.min(r,3),.5,16,i*.4));
     }
 }

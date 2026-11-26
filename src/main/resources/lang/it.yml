@@ -1,0 +1,18 @@
+shard-drop-denied: Non puoi gettare il frammento!
+totem-activated: Il totem ti ha salvato!
+ready: PRONTO
+cooldown: Ricarica
+active: ATTIVA
+ultimate: SUPREMA
+special: SPECIALE
+received: Hai ricevuto <shard>!
+given: <player> ha ricevuto <shard>.
+reloaded: Configurazione ricaricata.
+unknown-shard: Frammento sconosciuto.
+unknown-player: Giocatore non trovato.
+item-missing: Impossibile creare l’oggetto.
+usage: /failshards give/random/reload
+automatic: Automatic
+right: Right click
+shift-right: Shift + right
+shift-left: Shift + left

@@ -1,0 +1,18 @@
+shard-drop-denied: आप शार्ड नहीं फेंक सकते!
+totem-activated: टोटम ने आपको बचाया!
+ready: तैयार
+cooldown: प्रतीक्षा
+active: सक्रिय
+ultimate: अंतिम
+special: विशेष
+received: आपको <shard> मिला!
+given: <player> को <shard> मिला।
+reloaded: कॉन्फ़िगरेशन फिर लोड हुआ।
+unknown-shard: अज्ञात शार्ड।
+unknown-player: खिलाड़ी नहीं मिला।
+item-missing: आइटम नहीं बन सका।
+usage: /failshards give/random/reload
+automatic: Automatic
+right: Right click
+shift-right: Shift + right
+shift-left: Shift + left

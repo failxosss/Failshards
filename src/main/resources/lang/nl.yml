@@ -1,0 +1,18 @@
+shard-drop-denied: Je kunt je scherf niet weggooien!
+totem-activated: Je totem heeft je gered!
+ready: GEREED
+cooldown: Afkoeltijd
+active: ACTIEF
+ultimate: ULTIEM
+special: SPECIAAL
+received: Je kreeg <shard>!
+given: <player> kreeg <shard>.
+reloaded: Configuratie herladen.
+unknown-shard: Onbekende scherf.
+unknown-player: Speler niet gevonden.
+item-missing: Item kon niet worden gemaakt.
+usage: /failshards give/random/reload
+automatic: Automatic
+right: Right click
+shift-right: Shift + right
+shift-left: Shift + left

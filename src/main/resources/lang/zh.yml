@@ -1,0 +1,18 @@
+shard-drop-denied: 不能丢弃你的碎片！
+totem-activated: 图腾救了你！
+ready: 就绪
+cooldown: 冷却
+active: 主动
+ultimate: 终极
+special: 特殊
+received: 你获得了 <shard>！
+given: <player> 获得了 <shard>。
+reloaded: 配置已重载。
+unknown-shard: 未知碎片。
+unknown-player: 找不到玩家。
+item-missing: 无法创建物品。
+usage: /failshards give/random/reload
+automatic: Automatic
+right: Right click
+shift-right: Shift + right
+shift-left: Shift + left

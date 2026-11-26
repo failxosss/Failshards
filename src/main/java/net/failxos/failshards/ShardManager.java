@@ -46,6 +46,7 @@ public final class ShardManager {
     final NamespacedKey receivedKey;
     final NamespacedKey pendingKey;
 
+    private org.bukkit.configuration.file.YamlConfiguration language;
     private Mode mode = Mode.INVENTORY;
     private BukkitTask task;
 
@@ -67,6 +68,11 @@ public final class ShardManager {
     public void reload() {
         plugin.reloadConfig();
         FileConfiguration cfg = plugin.getConfig();
+        String code=cfg.getString("language","en").toLowerCase(Locale.ROOT);
+        if(!code.matches("[a-z]{2}" ) || plugin.getResource("lang/"+code+".yml")==null) code="en";
+        java.io.File langFile=new java.io.File(plugin.getDataFolder(),"lang/"+code+".yml");
+        if(!langFile.exists()) plugin.saveResource("lang/"+code+".yml",false);
+        language=org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(langFile);
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             clearModifiers(p);
@@ -186,8 +192,12 @@ public final class ShardManager {
         return mode;
     }
 
+    public String text(String path) {
+        String override=plugin.getConfig().getString("messages."+path, "");
+        return override.isEmpty()?language.getString(path,path):override;
+    }
     public void msg(org.bukkit.command.CommandSender to, String path, net.kyori.adventure.text.minimessage.tag.resolver.TagResolver... r) {
-        String text = plugin.getConfig().getString("messages." + path, "");
+        String text = text(path);
         if (!text.isEmpty()) {
             to.sendRichMessage(text, r);
         }

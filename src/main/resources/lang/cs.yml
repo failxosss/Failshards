@@ -1,0 +1,18 @@
+shard-drop-denied: Svůj shard nemůžeš vyhodit!
+totem-activated: Totem Shard ti zachránil život!
+ready: PŘIPRAVENO
+cooldown: Čekání
+active: AKTIVNÍ
+ultimate: ULTIMÁTNÍ
+special: SPECIÁLNÍ
+received: Získal jsi <shard>!
+given: Hráč <player> získal <shard>.
+reloaded: Konfigurace načtena.
+unknown-shard: Neznámý shard.
+unknown-player: Hráč nenalezen.
+item-missing: Předmět nelze vytvořit.
+usage: /failshards give/random/reload
+automatic: Automaticky
+right: Pravé tlačítko
+shift-right: Shift + pravé
+shift-left: Shift + levé
