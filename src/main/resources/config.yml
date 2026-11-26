@@ -779,6 +779,7 @@ abilities:
 
 # Model animation settings (one active scene per player).
 visual-effects:
+  max-displays-per-player: 12
   enabled: true
   vanilla-particles: false
   orbit-count: 5

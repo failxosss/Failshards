@@ -1,0 +1,751 @@
+profiles:
+  strength:
+    slot-1:
+      motion: rise
+      count: 4
+      scale: 0.8
+      height: 1.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: shock
+      count: 8
+      scale: 0.7
+      height: 0.1
+      radius: 5.0
+      enabled: true
+      ground-circle: true
+    slot-3:
+      motion: hammer
+      count: 3
+      scale: 0.9
+      height: 1.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+  arsenal:
+    slot-1:
+      motion: fan
+      count: 3
+      scale: 0.8
+      height: 1.0
+      radius: 4.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: rain
+      count: 10
+      scale: 0.6
+      height: 4.0
+      radius: 5.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: trail
+      count: 5
+      scale: 0.6
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+  glitched:
+    slot-1:
+      motion: blink
+      count: 7
+      scale: 0.5
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: glitch
+      count: 8
+      scale: 0.8
+      height: 1.0
+      radius: 4.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: dissolve
+      count: 9
+      scale: 0.4
+      height: 1.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+  soul:
+    slot-1:
+      motion: inward
+      count: 5
+      scale: 0.7
+      height: 1.0
+      radius: 3.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: spiral
+      count: 8
+      scale: 0.8
+      height: 1.0
+      radius: 4.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: rise
+      count: 6
+      scale: 0.5
+      height: 0.4
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+  fire:
+    slot-1:
+      motion: projectile
+      count: 5
+      scale: 0.9
+      height: 0.6
+      radius: 4.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: wall
+      count: 10
+      scale: 0.9
+      height: 0.3
+      radius: 5.0
+      enabled: true
+      ground-circle: true
+    slot-3:
+      motion: shock
+      count: 8
+      scale: 0.6
+      height: 0.4
+      radius: 4.0
+      enabled: true
+      ground-circle: true
+  water:
+    slot-1:
+      motion: wave
+      count: 6
+      scale: 1.0
+      height: 0.4
+      radius: 3.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: rain
+      count: 9
+      scale: 0.8
+      height: 3.0
+      radius: 4.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: bubble
+      count: 7
+      scale: 0.55
+      height: 1.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+  speed:
+    slot-1:
+      motion: trail
+      count: 6
+      scale: 0.6
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: zigzag
+      count: 8
+      scale: 0.65
+      height: 1.0
+      radius: 3.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: dash
+      count: 5
+      scale: 0.9
+      height: 0.5
+      radius: 3.0
+      enabled: true
+      ground-circle: false
+  air:
+    slot-1:
+      motion: lift
+      count: 4
+      scale: 0.9
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: tornado
+      count: 12
+      scale: 1.0
+      height: 0.0
+      radius: 3.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: shock
+      count: 8
+      scale: 1.0
+      height: 0.6
+      radius: 5.0
+      enabled: true
+      ground-circle: true
+  health:
+    slot-1:
+      motion: rise
+      count: 5
+      scale: 0.7
+      height: 0.5
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: zone
+      count: 8
+      scale: 0.9
+      height: 0.3
+      radius: 4.0
+      enabled: true
+      ground-circle: true
+    slot-3:
+      motion: shield
+      count: 6
+      scale: 0.75
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+  guardian:
+    slot-1:
+      motion: shield
+      count: 5
+      scale: 1.0
+      height: 1.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: dome
+      count: 10
+      scale: 0.9
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: lock
+      count: 6
+      scale: 0.8
+      height: 1.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+  totem:
+    slot-1:
+      motion: revive
+      count: 5
+      scale: 1.0
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: true
+    slot-2:
+      motion: gate
+      count: 6
+      scale: 1.0
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: pulse
+      count: 7
+      scale: 0.7
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+  frost:
+    slot-1:
+      motion: lock
+      count: 6
+      scale: 0.8
+      height: 1.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: storm
+      count: 12
+      scale: 0.6
+      height: 2.0
+      radius: 4.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: spikes
+      count: 8
+      scale: 1.0
+      height: 0.2
+      radius: 3.0
+      enabled: true
+      ground-circle: false
+  thunder:
+    slot-1:
+      motion: dash
+      count: 5
+      scale: 0.8
+      height: 1.0
+      radius: 3.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: storm
+      count: 10
+      scale: 1.0
+      height: 3.0
+      radius: 4.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: grid
+      count: 9
+      scale: 0.7
+      height: 0.2
+      radius: 3.0
+      enabled: true
+      ground-circle: true
+  shadow:
+    slot-1:
+      motion: dissolve
+      count: 6
+      scale: 0.7
+      height: 1.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: dome
+      count: 8
+      scale: 1.0
+      height: 1.0
+      radius: 4.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: zigzag
+      count: 5
+      scale: 0.9
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+  ender:
+    slot-1:
+      motion: blink
+      count: 6
+      scale: 0.8
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: gate
+      count: 8
+      scale: 0.9
+      height: 1.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: crown
+      count: 5
+      scale: 0.7
+      height: 2.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+  earth:
+    slot-1:
+      motion: lock
+      count: 6
+      scale: 1.0
+      height: 1.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: shock
+      count: 10
+      scale: 1.0
+      height: 0.1
+      radius: 5.0
+      enabled: true
+      ground-circle: true
+    slot-3:
+      motion: hammer
+      count: 4
+      scale: 0.8
+      height: 1.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+  poison:
+    slot-1:
+      motion: inward
+      count: 5
+      scale: 0.65
+      height: 1.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: bubble
+      count: 10
+      scale: 0.8
+      height: 0.8
+      radius: 4.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: fan
+      count: 6
+      scale: 0.75
+      height: 0.8
+      radius: 3.0
+      enabled: true
+      ground-circle: false
+  vampire:
+    slot-1:
+      motion: crown
+      count: 4
+      scale: 0.8
+      height: 2.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: inward
+      count: 8
+      scale: 0.8
+      height: 1.0
+      radius: 4.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: pulse
+      count: 6
+      scale: 0.9
+      height: 1.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+  archer:
+    slot-1:
+      motion: focus
+      count: 4
+      scale: 0.8
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: aim
+      count: 5
+      scale: 0.9
+      height: 1.0
+      radius: 3.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: trail
+      count: 7
+      scale: 0.65
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+  gravity:
+    slot-1:
+      motion: fall
+      count: 7
+      scale: 0.65
+      height: 2.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: inward
+      count: 10
+      scale: 0.8
+      height: 1.0
+      radius: 4.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: lift
+      count: 5
+      scale: 0.8
+      height: 0.4
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+  crystal:
+    slot-1:
+      motion: lock
+      count: 6
+      scale: 1.0
+      height: 1.0
+      radius: 1.0
+      enabled: true
+      ground-circle: true
+    slot-2:
+      motion: shock
+      count: 10
+      scale: 1.0
+      height: 0.8
+      radius: 5.0
+      enabled: true
+      ground-circle: true
+    slot-3:
+      motion: heart
+      count: 5
+      scale: 0.9
+      height: 2.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+  time:
+    slot-1:
+      motion: clock
+      count: 6
+      scale: 0.8
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: true
+    slot-2:
+      motion: reverse
+      count: 8
+      scale: 0.8
+      height: 1.0
+      radius: 4.0
+      enabled: true
+      ground-circle: true
+    slot-3:
+      motion: gate
+      count: 5
+      scale: 1.0
+      height: 1.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+  nature:
+    slot-1:
+      motion: grow
+      count: 7
+      scale: 0.8
+      height: 0.2
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: spikes
+      count: 10
+      scale: 1.0
+      height: 0.2
+      radius: 4.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: bloom
+      count: 8
+      scale: 0.8
+      height: 0.2
+      radius: 2.0
+      enabled: true
+      ground-circle: true
+  lava:
+    slot-1:
+      motion: shield
+      count: 6
+      scale: 0.9
+      height: 1.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: geyser
+      count: 10
+      scale: 0.9
+      height: 0.1
+      radius: 4.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: rise
+      count: 5
+      scale: 0.9
+      height: 0.3
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+  moon:
+    slot-1:
+      motion: crown
+      count: 5
+      scale: 0.9
+      height: 2.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: gate
+      count: 7
+      scale: 0.8
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: trail
+      count: 6
+      scale: 0.6
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+  sun:
+    slot-1:
+      motion: heart
+      count: 5
+      scale: 1.0
+      height: 2.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: burst
+      count: 10
+      scale: 1.0
+      height: 0.8
+      radius: 4.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: clock
+      count: 8
+      scale: 0.8
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: true
+  ocean:
+    slot-1:
+      motion: dash
+      count: 6
+      scale: 0.9
+      height: 0.5
+      radius: 3.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: dome
+      count: 10
+      scale: 0.8
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: wave
+      count: 8
+      scale: 1.0
+      height: 0.4
+      radius: 5.0
+      enabled: true
+      ground-circle: false
+  phantom:
+    slot-1:
+      motion: blink
+      count: 6
+      scale: 0.8
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: lift
+      count: 8
+      scale: 0.9
+      height: 0.4
+      radius: 3.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: fall
+      count: 7
+      scale: 0.8
+      height: 2.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+  dragon:
+    slot-1:
+      motion: crown
+      count: 6
+      scale: 0.9
+      height: 2.0
+      radius: 1.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: cone
+      count: 9
+      scale: 1.0
+      height: 1.0
+      radius: 4.0
+      enabled: true
+      ground-circle: false
+    slot-3:
+      motion: wings
+      count: 6
+      scale: 1.2
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false
+  cosmic:
+    slot-1:
+      motion: zigzag
+      count: 7
+      scale: 0.8
+      height: 1.0
+      radius: 3.0
+      enabled: true
+      ground-circle: false
+    slot-2:
+      motion: galaxy
+      count: 10
+      scale: 0.9
+      height: 1.0
+      radius: 4.0
+      enabled: true
+      ground-circle: true
+    slot-3:
+      motion: dome
+      count: 8
+      scale: 0.9
+      height: 1.0
+      radius: 2.0
+      enabled: true
+      ground-circle: false

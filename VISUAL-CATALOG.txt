@@ -1,0 +1,90 @@
+strength   1 Strength II              fist         rise
+strength   2 Shockwave                crack        shock
+strength   3 Mining fury              pick         hammer
+arsenal    1 Triple arrow             arrow        fan
+arsenal    2 Arrow rain               arrow        rain
+arsenal    3 Archer mobility          wing         trail
+glitched   1 Blink                    pixel        blink
+glitched   2 Ability lock             eye          glitch
+glitched   3 Glitch cloak             pixel        dissolve
+soul       1 Soul pulse               flame        inward
+soul       2 Soul drain               skull        spiral
+soul       3 Soul recovery            flame        rise
+fire       1 Fire burst               flame        projectile
+fire       2 Fire ring                flame        wall
+fire       3 Flame surge              flame        shock
+water      1 Water wave               wave         wave
+water      2 Water vortex             drop         rain
+water      3 Conduit power            bubble       bubble
+speed      1 Speed III                bolt         trail
+speed      2 Lightning rush           bolt         zigzag
+speed      3 Lightning dash           chevron      dash
+air        1 Wind jump                wing         lift
+air        2 Tornado                  wind         tornado
+air        3 Wind blast               wind         shock
+health     1 Instant heal             heart        rise
+health     2 Healing zone             cross        zone
+health     3 Team absorption          heart        shield
+guardian   1 Resistance II            shield       shield
+guardian   2 Protective dome          shield       dome
+guardian   3 Guardian barrier         hex          lock
+totem      1 Second Life              totem        revive
+totem      2 Divine Shield            shield       gate
+totem      3 Healing Aura             cross        pulse
+frost      1 Ice Armor                snow         lock
+frost      2 Ice Storm                snow         storm
+frost      3 Freeze                   ice          spikes
+thunder    1 Electric Rush            bolt         dash
+thunder    2 Thunderstorm             bolt         storm
+thunder    3 Static Field             bolt         grid
+shadow     1 Vanish                   eye          dissolve
+shadow     2 Darkness Field           eye          dome
+shadow     3 Shadow Sprint            wing         zigzag
+ender      1 Ender Escape             eye          blink
+ender      2 Ender Shield             hex          gate
+ender      3 Void Sight               eye          crown
+earth      1 Stone Armor              rock         lock
+earth      2 Earth Tremor             crack        shock
+earth      3 Mining Power             pick         hammer
+poison     1 Antidote                 drop         inward
+poison     2 Poison Cloud             skull        bubble
+poison     3 Venom                    fang         fan
+vampire    1 Night Vision             eye          crown
+vampire    2 Life Drain               fang         inward
+vampire    3 Blood Shield             shield       pulse
+archer     1 Eagle Sight              eye          focus
+archer     2 Arrow Focus              arrow        aim
+archer     3 Archer Sprint            feather      trail
+gravity    1 Feather Fall             feather      fall
+gravity    2 Gravity Field            planet       inward
+gravity    3 High Jump                chevron      lift
+crystal    1 Crystal Armor            gem          lock
+crystal    2 Crystal Flash            star         shock
+crystal    3 Crystal Heart            heart        heart
+time       1 Time Boost               clock        clock
+time       2 Slow Motion              clock        reverse
+time       3 Time Shield              hourglass    gate
+nature     1 Growth                   leaf         grow
+nature     2 Roots                    vine         spikes
+nature     3 Nature Heal              flower       bloom
+lava       1 Heat Shield              rock         shield
+lava       2 Magma Field              flame        geyser
+lava       3 Magma Power              fist         rise
+moon       1 Moonlight                moon         crown
+moon       2 Lunar Shield             moon         gate
+moon       3 Night Boost              star         trail
+sun        1 Solar Heal               sun          heart
+sun        2 Solar Flare              sun          burst
+sun        3 Sun Aura                 sun          clock
+ocean      1 Ocean Speed              wave         dash
+ocean      2 Bubble Shield            bubble       dome
+ocean      3 Tidal Pressure           wave         wave
+phantom    1 Ghost Step               ghost        blink
+phantom    2 Phantom Lift             wing         lift
+phantom    3 Vanish                   ghost        fall
+dragon     1 Dragon Power             fang         crown
+dragon     2 Dragon Roar              flame        cone
+dragon     3 Dragon Wings             wing         wings
+cosmic     1 Star Speed               star         zigzag
+cosmic     2 Cosmic Field             planet       galaxy
+cosmic     3 Cosmic Shield            planet       dome
