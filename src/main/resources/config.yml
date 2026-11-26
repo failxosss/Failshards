@@ -45,7 +45,7 @@ shards:
     item: failshards:fire_shard
     effects:
     - fire_resistance:0
-    ignite-on-hit-ticks: 80
+    ignite-on-hit-ticks: 160
   water:
     name: Water Shard
     item: failshards:water_shard
@@ -172,14 +172,26 @@ abilities:
     third-cooldown: 90
   fire:
     enabled: true
-    active-cooldown: 45
-    ultimate-cooldown: 150
+    active-cooldown: 40
+    ultimate-cooldown: 130
     third-cooldown: 90
+    slot-1:
+      duration: 8
+    slot-2:
+      duration: 10
+    slot-3:
+      duration: 30
   water:
     enabled: true
-    active-cooldown: 45
-    ultimate-cooldown: 150
+    active-cooldown: 40
+    ultimate-cooldown: 130
     third-cooldown: 90
+    slot-1:
+      duration: 8
+    slot-2:
+      duration: 10
+    slot-3:
+      duration: 30
   speed:
     enabled: true
     active-cooldown: 40
