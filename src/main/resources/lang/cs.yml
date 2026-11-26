@@ -16,3 +16,9 @@ automatic: Automaticky
 right: Pravé tlačítko
 shift-right: Shift + pravé
 shift-left: Shift + levé
+change-disabled: "<red>Výměna shardu je vypnutá."
+change-used: "<red>Příkaz /changeshard už jsi použil."
+change-no-shard: "<red>Musíš mít shard v inventáři."
+change-multiple: "<red>Pro výměnu měj v inventáři právě jeden shard."
+change-unavailable: "<red>Nový shard není dostupný. Zkus to později."
+change-success: "<green>Vyměnil jsi <old> za <shard>!"

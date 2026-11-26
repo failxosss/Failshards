@@ -16,3 +16,9 @@ automatic: Automatic
 right: Right click
 shift-right: Shift + right
 shift-left: Shift + left
+change-disabled: "<red>Wymiana jest wyłączona."
+change-used: "<red>Użyto już /changeshard."
+change-no-shard: "<red>Musisz mieć shard w ekwipunku."
+change-multiple: "<red>Do wymiany potrzebujesz dokładnie jednego shardu."
+change-unavailable: "<red>Brak zamiennika. Spróbuj później."
+change-success: "<green>Wymieniono <old> na <shard>!"

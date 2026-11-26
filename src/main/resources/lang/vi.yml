@@ -16,3 +16,9 @@ automatic: Automatic
 right: Right click
 shift-right: Shift + right
 shift-left: Shift + left
+change-disabled: "<red>Shard exchange is disabled."
+change-used: "<red>You have already used /changeshard."
+change-no-shard: "<red>You must have a shard in your inventory."
+change-multiple: "<red>Keep exactly one shard in your inventory to exchange it."
+change-unavailable: "<red>No replacement is available. Try again later."
+change-success: "<green>You exchanged <old> for <shard>!"

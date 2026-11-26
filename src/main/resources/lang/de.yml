@@ -16,3 +16,9 @@ automatic: Automatic
 right: Right click
 shift-right: Shift + right
 shift-left: Shift + left
+change-disabled: "<red>Der Tausch ist deaktiviert."
+change-used: "<red>Du hast /changeshard bereits benutzt."
+change-no-shard: "<red>Du brauchst einen Shard im Inventar."
+change-multiple: "<red>Du brauchst genau einen Shard."
+change-unavailable: "<red>Kein Ersatz verfügbar. Versuche es später."
+change-success: "<green>Du hast <old> gegen <shard> getauscht!"

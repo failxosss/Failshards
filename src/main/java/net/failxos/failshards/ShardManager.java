@@ -73,6 +73,9 @@ public final class ShardManager {
         java.io.File langFile=new java.io.File(plugin.getDataFolder(),"lang/"+code+".yml");
         if(!langFile.exists()) plugin.saveResource("lang/"+code+".yml",false);
         language=org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(langFile);
+        try (var in = plugin.getResource("lang/"+code+".yml")) {
+            if (in != null) language.setDefaults(org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new java.io.InputStreamReader(in, java.nio.charset.StandardCharsets.UTF_8)));
+        } catch (java.io.IOException ex) { plugin.getLogger().warning(ex.toString()); }
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             clearModifiers(p);
@@ -265,6 +268,52 @@ public final class ShardManager {
         }
     }
 
+    // ---------------------------------------------------------------- one-time reroll
+    public boolean changeShard(Player p) {
+        if (!plugin.getConfig().getBoolean("change-shard.enabled", true)) {
+            msg(p, "change-disabled"); return true;
+        }
+        NamespacedKey used = new NamespacedKey(plugin, "change_shard_used");
+        var data = p.getPersistentDataContainer();
+        if (data.has(used, PersistentDataType.BYTE)) {
+            msg(p, "change-used"); return true;
+        }
+        if (p.isDead()) { msg(p, "change-no-shard"); return true; }
+        PlayerInventory inv = p.getInventory();
+        int index = -1;
+        Shard old = null;
+        for (int i = 0; i < inv.getSize(); i++) {
+            ItemStack item = inv.getItem(i);
+            Shard found = shardOf(item);
+            if (found == null) continue;
+            // Refuse ambiguous inventories or stacks rather than duplicate items.
+            if (old != null || item.getAmount() != 1) {
+                msg(p, "change-multiple"); return true;
+            }
+            old = found; index = i;
+        }
+        if (old == null) { msg(p, "change-no-shard"); return true; }
+        List<Shard> choices = new ArrayList<>(shards.values());
+        choices.remove(old);
+        if (choices.isEmpty()) { msg(p, "change-unavailable"); return true; }
+        Shard replacement = choices.get(ThreadLocalRandom.current().nextInt(choices.size()));
+        ItemStack item = createItem(replacement);
+        if (item == null || item.getType().isAir()) {
+            msg(p, "change-unavailable"); return true;
+        }
+        item = item.clone(); item.setAmount(1);
+        inv.setItem(index, item);
+        data.set(used, PersistentDataType.BYTE, (byte) 1);
+        data.set(receivedKey, PersistentDataType.BYTE, (byte) 1);
+        data.remove(pendingKey);
+        p.saveData();
+        syncAttributes(p, activeShards(p));
+        forget(p.getUniqueId());
+        msg(p, "change-success", Placeholder.unparsed("old", old.name()),
+                Placeholder.unparsed("shard", replacement.name()));
+        return true;
+    }
+
     // ---------------------------------------------------------------- first join
 
     public void giveRandomLater(Player p) {
@@ -273,7 +322,7 @@ public final class ShardManager {
 
     private void attempt(Player p, int n) {
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
-            if (!p.isOnline()) return; // remains pending until next join
+            if (!p.isOnline() || p.getPersistentDataContainer().has(receivedKey, PersistentDataType.BYTE)) return;
             List<Shard> all = new ArrayList<>(shards.values());
             if (all.isEmpty()) return;
             Shard s = all.get(ThreadLocalRandom.current().nextInt(all.size()));

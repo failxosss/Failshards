@@ -24,6 +24,14 @@ public final class FailShards extends JavaPlugin {
             cmd.setExecutor(sc);
             cmd.setTabCompleter(sc);
         }
+        PluginCommand change = getCommand("changeshard");
+        if (change != null) change.setExecutor((sender, command, label, args) -> {
+            if (!(sender instanceof org.bukkit.entity.Player player)) {
+                sender.sendMessage("This command is for players only."); return true;
+            }
+            if (args.length != 0) return false;
+            return manager.changeShard(player);
+        });
         manager.startTask();
     }
 

@@ -6,11 +6,17 @@ author: Failxos
 description: Random first-join shards, abilities and death retention (ItemsAdder)
 softdepend: [ItemsAdder]
 commands:
+  changeshard:
+    description: Exchange your shard once
+    usage: /changeshard
+    permission: failshards.changeshard
   failshards:
     description: FailShards admin command
     usage: /<command> <give|random|reload>
     permission: failshards.admin
 permissions:
+  failshards.changeshard:
+    default: true
   failshards.admin:
     description: Manage FailShards
     default: op

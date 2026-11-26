@@ -6,7 +6,15 @@ first-join:
   only-new-players: true
 keep-on-death: true
 protect-dropped-items: true
+change-shard:
+  enabled: true
 messages:
+  change-disabled: ''
+  change-used: ''
+  change-no-shard: ''
+  change-multiple: ''
+  change-unavailable: ''
+  change-success: ''
   shard-drop-denied: ''
   totem-activated: ''
   received: ''
@@ -779,13 +787,13 @@ abilities:
 
 # Model animation settings (one active scene per player).
 visual-effects:
-  max-displays-per-player: 12
+  max-displays-per-player: 16
   enabled: true
   vanilla-particles: false
   orbit-count: 5
   radius: 1.45
   rotation-speed: 1.7
-  view-range: 0.75
+  view-range: 1.0
   max-active-players: 30
   shards:
     air:
