@@ -4,7 +4,7 @@ main: net.failxos.failshards.FailShards
 api-version: '1.21'
 author: Failxos
 description: Random first-join shards, abilities and death retention (ItemsAdder)
-softdepend: [ItemsAdder]
+softdepend: [ItemsAdder, BetterModel]
 commands:
   changeshard:
     description: Exchange your shard once

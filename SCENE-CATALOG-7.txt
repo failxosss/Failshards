@@ -1,0 +1,90 @@
+strength_1: Strength II | rise | 6 independently animated parts
+strength_2: Shockwave | shock | 9 independently animated parts
+strength_3: Mining fury | hammer | 7 independently animated parts
+arsenal_1: Triple arrow | fan | 7 independently animated parts
+arsenal_2: Arrow rain | rain | 7 independently animated parts
+arsenal_3: Archer mobility | trail | 6 independently animated parts
+glitched_1: Blink | blink | 9 independently animated parts
+glitched_2: Ability lock | glitch | 9 independently animated parts
+glitched_3: Glitch cloak | dissolve | 9 independently animated parts
+soul_1: Soul pulse | inward | 8 independently animated parts
+soul_2: Soul drain | spiral | 8 independently animated parts
+soul_3: Soul recovery | rise | 6 independently animated parts
+fire_1: Fire burst | projectile | 7 independently animated parts
+fire_2: Fire ring | wall | 8 independently animated parts
+fire_3: Flame surge | shock | 9 independently animated parts
+water_1: Water wave | wave | 7 independently animated parts
+water_2: Water vortex | rain | 7 independently animated parts
+water_3: Conduit power | bubble | 8 independently animated parts
+speed_1: Speed III | trail | 6 independently animated parts
+speed_2: Lightning rush | zigzag | 6 independently animated parts
+speed_3: Lightning dash | dash | 6 independently animated parts
+air_1: Wind jump | lift | 2 independently animated parts
+air_2: Tornado | tornado | 7 independently animated parts
+air_3: Wind blast | shock | 9 independently animated parts
+health_1: Instant heal | rise | 6 independently animated parts
+health_2: Healing zone | zone | 8 independently animated parts
+health_3: Team absorption | shield | 7 independently animated parts
+guardian_1: Resistance II | shield | 7 independently animated parts
+guardian_2: Protective dome | dome | 9 independently animated parts
+guardian_3: Guardian barrier | lock | 7 independently animated parts
+totem_1: Second Life | revive | 6 independently animated parts
+totem_2: Divine Shield | gate | 7 independently animated parts
+totem_3: Healing Aura | pulse | 6 independently animated parts
+frost_1: Ice Armor | lock | 7 independently animated parts
+frost_2: Ice Storm | storm | 8 independently animated parts
+frost_3: Freeze | spikes | 8 independently animated parts
+thunder_1: Electric Rush | dash | 6 independently animated parts
+thunder_2: Thunderstorm | storm | 8 independently animated parts
+thunder_3: Static Field | grid | 8 independently animated parts
+shadow_1: Vanish | dissolve | 9 independently animated parts
+shadow_2: Darkness Field | dome | 9 independently animated parts
+shadow_3: Shadow Sprint | zigzag | 6 independently animated parts
+ender_1: Ender Escape | blink | 9 independently animated parts
+ender_2: Ender Shield | gate | 7 independently animated parts
+ender_3: Void Sight | crown | 6 independently animated parts
+earth_1: Stone Armor | lock | 7 independently animated parts
+earth_2: Earth Tremor | shock | 9 independently animated parts
+earth_3: Mining Power | hammer | 7 independently animated parts
+poison_1: Antidote | inward | 8 independently animated parts
+poison_2: Poison Cloud | bubble | 8 independently animated parts
+poison_3: Venom | fan | 7 independently animated parts
+vampire_1: Night Vision | crown | 6 independently animated parts
+vampire_2: Life Drain | inward | 8 independently animated parts
+vampire_3: Blood Shield | pulse | 6 independently animated parts
+archer_1: Eagle Sight | focus | 7 independently animated parts
+archer_2: Arrow Focus | aim | 7 independently animated parts
+archer_3: Archer Sprint | trail | 6 independently animated parts
+gravity_1: Feather Fall | fall | 6 independently animated parts
+gravity_2: Gravity Field | inward | 8 independently animated parts
+gravity_3: High Jump | lift | 2 independently animated parts
+crystal_1: Crystal Armor | lock | 7 independently animated parts
+crystal_2: Crystal Flash | shock | 9 independently animated parts
+crystal_3: Crystal Heart | heart | 6 independently animated parts
+time_1: Time Boost | clock | 3 independently animated parts
+time_2: Slow Motion | reverse | 3 independently animated parts
+time_3: Time Shield | gate | 7 independently animated parts
+nature_1: Growth | grow | 8 independently animated parts
+nature_2: Roots | spikes | 8 independently animated parts
+nature_3: Nature Heal | bloom | 8 independently animated parts
+lava_1: Heat Shield | shield | 7 independently animated parts
+lava_2: Magma Field | geyser | 8 independently animated parts
+lava_3: Magma Power | rise | 6 independently animated parts
+moon_1: Moonlight | crown | 6 independently animated parts
+moon_2: Lunar Shield | gate | 7 independently animated parts
+moon_3: Night Boost | trail | 6 independently animated parts
+sun_1: Solar Heal | heart | 6 independently animated parts
+sun_2: Solar Flare | burst | 9 independently animated parts
+sun_3: Sun Aura | clock | 7 independently animated parts
+ocean_1: Ocean Speed | dash | 6 independently animated parts
+ocean_2: Bubble Shield | dome | 9 independently animated parts
+ocean_3: Tidal Pressure | wave | 7 independently animated parts
+phantom_1: Ghost Step | blink | 9 independently animated parts
+phantom_2: Phantom Lift | lift | 2 independently animated parts
+phantom_3: Vanish | fall | 6 independently animated parts
+dragon_1: Dragon Power | crown | 6 independently animated parts
+dragon_2: Dragon Roar | cone | 7 independently animated parts
+dragon_3: Dragon Wings | wings | 2 independently animated parts
+cosmic_1: Star Speed | zigzag | 6 independently animated parts
+cosmic_2: Cosmic Field | galaxy | 8 independently animated parts
+cosmic_3: Cosmic Shield | dome | 9 independently animated parts
