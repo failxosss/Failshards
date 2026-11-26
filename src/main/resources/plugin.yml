@@ -1,0 +1,16 @@
+name: FailShards
+version: '${project.version}'
+main: net.failxos.failshards.FailShards
+api-version: '1.21'
+author: Failxos
+description: Random first-join shards, abilities and death retention (ItemsAdder)
+softdepend: [ItemsAdder]
+commands:
+  failshards:
+    description: FailShards admin command
+    usage: /<command> <give|random|reload>
+    permission: failshards.admin
+permissions:
+  failshards.admin:
+    description: Manage FailShards
+    default: op

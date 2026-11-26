@@ -1,0 +1,128 @@
+# FailShards by Failxos
+# When a shard is active: INVENTORY (any inventory slot), HOTBAR (hotbar + offhand), HAND (held in hand)
+mode: INVENTORY
+
+first-join:
+  enabled: true
+  # true = only players joining for the first time
+  only-new-players: true
+
+# Shards are retained on death (other items drop)
+keep-on-death: true
+
+# Dropped shards are protected from fire, lava, explosions and despawning
+protect-dropped-items: true
+
+messages:
+  received: "<gray>You received <gold><shard></gold><gray>!"
+  given: "<green>Player <player> received <shard>."
+  reloaded: "<green>Configuration reloaded."
+  unknown-shard: "<red>Unknown shard."
+  unknown-player: "<red>Player not found."
+  item-missing: "<red>Could not create item. Is ItemsAdder loaded and its resource pack installed?"
+  usage: "<gray>/failshards <give <player> <shard>|random <player>|reload>"
+
+# effects:    "effect:amplifier" (0 = I, 1 = II ...) - Minecraft effect names
+# attributes: "attribute:value" (added to base value) - e.g. max_health:4 = +2 hearts
+# item:       ItemsAdder namespaced ID
+shards:
+  strength:
+    name: "Strength Shard"
+    item: "failshards:strength_shard"
+    effects: ["strength:0"]
+  speed:
+    name: "Speed Shard"
+    item: "failshards:speed_shard"
+    effects: ["speed:1"]
+  health:
+    name: "Health Shard"
+    item: "failshards:health_shard"
+    attributes: ["max_health:4"]
+  fire:
+    name: "Fire Shard"
+    item: "failshards:fire_shard"
+    effects: ["fire_resistance:0"]
+    ignite-on-hit-ticks: 80
+  water:
+    name: "Water Shard"
+    item: "failshards:water_shard"
+    effects: ["water_breathing:0", "dolphins_grace:0"]
+  air:
+    name: "Air Shard"
+    item: "failshards:air_shard"
+    effects: ["slow_falling:0", "jump_boost:1"]
+  guardian:
+    name: "Guardian Shard"
+    item: "failshards:guardian_shard"
+    effects: ["resistance:0"]
+  arsenal:
+    name: "Arsenal Shard"
+    item: "failshards:arsenal_shard"
+    attributes: ["attack_damage:2"]
+  soul:
+    name: "Soul Shard"
+    item: "failshards:soul_shard"
+    effects: ["regeneration:0"]
+  glitched:
+    name: "Glitched Shard"
+    item: "failshards:glitched_shard"
+    # Grants a random effect from the list every X seconds for Y seconds
+    random-effects: ["speed:1", "jump_boost:1", "night_vision:0", "invisibility:0", "haste:1", "glowing:0", "slow_falling:0"]
+    random-interval: 20
+    random-duration: 15
+
+# Active: right click; ultimate: Shift + right click; third: Shift + left click.
+abilities:
+  enabled: true
+  hud: true
+  disabled-worlds: []
+  strength:
+    enabled: true
+    active-cooldown: 60
+    ultimate-cooldown: 180
+    third-cooldown: 90
+  arsenal:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 150
+    third-cooldown: 90
+  glitched:
+    enabled: true
+    active-cooldown: 40
+    ultimate-cooldown: 180
+    third-cooldown: 90
+  soul:
+    enabled: true
+    active-cooldown: 60
+    ultimate-cooldown: 180
+    third-cooldown: 90
+  fire:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 150
+    third-cooldown: 90
+  water:
+    enabled: true
+    active-cooldown: 45
+    ultimate-cooldown: 150
+    third-cooldown: 90
+  speed:
+    enabled: true
+    active-cooldown: 40
+    ultimate-cooldown: 150
+    third-cooldown: 90
+  air:
+    enabled: true
+    active-cooldown: 40
+    ultimate-cooldown: 150
+    third-cooldown: 90
+  health:
+    enabled: true
+    active-cooldown: 60
+    ultimate-cooldown: 180
+    third-cooldown: 90
+  guardian:
+    enabled: true
+    active-cooldown: 60
+    ultimate-cooldown: 180
+    third-cooldown: 90
