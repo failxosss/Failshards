@@ -22,18 +22,17 @@ public final class ShardAbilities implements Listener {
     private final Set<Arrow> arrows = new HashSet<>();
     private final ModelEffects visuals;
     private final Random random = new Random();
-    private final Map<UUID, Long> waterWalkUntil = new HashMap<>();
-    private final Map<UUID, Long> lavaWalkUntil = new HashMap<>();
     public ShardAbilities(FailShards plugin, ShardManager manager) {
         this.plugin=plugin; this.manager=manager;
         visuals=new ModelEffects(plugin,manager);
         Bukkit.getPluginManager().registerEvents(visuals,plugin);
+        Bukkit.getScheduler().runTaskTimer(plugin,this::surfaceTick,1L,1L);
         Bukkit.getScheduler().runTaskTimer(plugin, () -> {
             if (!plugin.getConfig().getBoolean("abilities.hud",true)) return;
             for(Player p:Bukkit.getOnlinePlayers()) {
                 Shard s=held(p); if(s==null) continue;
                 long[] t=cooldown.getOrDefault(p.getUniqueId(),new long[3]);
-                p.sendActionBar(Component.text(s.name()+" | "+manager.text(s.key().equals("totem")?"automatic":"right")+": "+remaining(s.key().equals("totem")?totemEnd(p):t[0])+" | "+manager.text("shift-right")+": "+remaining(t[1])+" | "+manager.text("shift-left")+": "+remaining(t[2])));
+                p.sendActionBar(Component.text(s.name()+" | "+manager.text(s.key().equals("totem")?"automatic":"right")+": "+remaining(s.key().equals("totem")?totemEnd(p):t[0])+" | "+manager.text("shift-right")+": "+remaining(t[1])+" | "+(Set.of("water","fire").contains(s.key())?"Surface walk: "+(p.isSneaking()?"Dive":"Auto"):manager.text("shift-left")+": "+remaining(t[2]))));
             }
         },20L,20L);
     }
@@ -48,6 +47,7 @@ public final class ShardAbilities implements Listener {
         if(e.getHand()==EquipmentSlot.OFF_HAND && manager.shardOf(p.getInventory().getItemInMainHand())!=null) return;
         // Ignore ordinary block interactions with an offhand shard; use the main hand for activation.
         if(e.getHand()==EquipmentSlot.OFF_HAND && e.getClickedBlock()!=null) return;
+        if(third && Set.of("water","fire").contains(s.key()))return;
         e.setCancelled(true); activate(p,s,third?2:p.isSneaking()?1:0);
     }
     private boolean pSneakLeft(PlayerInteractEvent e){return e.getPlayer().isSneaking() && (e.getAction()==org.bukkit.event.block.Action.LEFT_CLICK_AIR || e.getAction()==org.bukkit.event.block.Action.LEFT_CLICK_BLOCK);}
@@ -66,39 +66,71 @@ public final class ShardAbilities implements Listener {
     private Location forward(Player p,double d){Vector v=p.getLocation().getDirection().setY(0);if(v.lengthSquared()>0.001)v.normalize();return p.getLocation().add(v.multiply(d));}
     private void arrow(Player p,Location l,Vector v){Arrow a=l.getWorld().spawnArrow(l,v,1.4f,0f);a.setShooter(p);a.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);arrows.add(a);Bukkit.getScheduler().runTaskLater(plugin,()->{a.remove();arrows.remove(a);},100L);}
     @EventHandler(ignoreCancelled=true) public void arrowHit(org.bukkit.event.entity.EntityDamageByEntityEvent e){if(e.getDamager() instanceof Arrow a&&arrows.contains(a)&&a.getShooter() instanceof Player p&&ally(p,e.getEntity()))e.setCancelled(true);}
-    private void enableWaterWalk(Player p,int seconds){waterWalkUntil.put(p.getUniqueId(),System.currentTimeMillis()+seconds*1000L);effect(p,PotionEffectType.CONDUIT_POWER,20*seconds,0);}
-    private void enableLavaWalk(Player p,int seconds){lavaWalkUntil.put(p.getUniqueId(),System.currentTimeMillis()+seconds*1000L);effect(p,PotionEffectType.FIRE_RESISTANCE,20*seconds,0);}
-    private boolean activeUntil(Map<UUID,Long> map, Player p){Long end=map.get(p.getUniqueId()); if(end==null)return false; if(end<=System.currentTimeMillis()){map.remove(p.getUniqueId()); return false;} return true;}
-    private void temporarySurface(Block block, Material temp, long revertTicks){
-        Material current=block.getType();
-        if(current==temp) return;
-        if(!(current==Material.WATER || current==Material.LAVA)) return;
-        BlockData old=block.getBlockData().clone();
-        block.setType(temp,false);
-        Bukkit.getScheduler().runTaskLater(plugin,()->{ if(block.getType()==temp) block.setBlockData(old,false); },revertTicks);
+    private record Surface(BlockData original, Material replacement) {}
+    private final Map<Block,Surface> surfaces=new HashMap<>();
+    private boolean walkingEnabled(Player p,String shard){
+        return allowed(p) && (p.getGameMode()==GameMode.SURVIVAL || p.getGameMode()==GameMode.ADVENTURE)
+            && !p.isFlying() && !p.isGliding() && !p.isInsideVehicle()
+            && plugin.getConfig().getBoolean("abilities.enabled",true)
+            && plugin.getConfig().getBoolean("abilities."+shard+".enabled",true)
+            && plugin.getConfig().getBoolean("abilities."+shard+".surface-walk",true)
+            && manager.activeShards(p).stream().anyMatch(sh->sh.key().equals(shard));
     }
-    private void makeSurface(Player p, Material liquid, Material temp){
-        Location base=p.getLocation().clone().subtract(0,1,0);
-        int by=base.getBlockY();
-        World w=p.getWorld();
-        for(int x=-1;x<=1;x++) for(int z=-1;z<=1;z++) {
-            Block b=w.getBlockAt(base.getBlockX()+x,by,base.getBlockZ()+z);
-            if(b.getType()==liquid) temporarySurface(b,temp,16L);
+    private Material originalType(Block b){Surface s=surfaces.get(b);return s==null?b.getType():s.original().getMaterial();}
+    private void surfaceTick(){
+        Map<Block,Material> wanted=new HashMap<>();
+        Set<Block> diving=new HashSet<>();
+        for(Player p:Bukkit.getOnlinePlayers()){
+            if(!allowed(p))continue;
+            Location l=p.getLocation(); World w=p.getWorld();
+            boolean water=walkingEnabled(p,"water"),lava=walkingEnabled(p,"fire");
+            if(p.isSneaking()){
+                for(int y=l.getBlockY()-1;y<=l.getBlockY()+1;y++)for(int x=-1;x<=1;x++)for(int z=-1;z<=1;z++)
+                    if(y>=w.getMinHeight()&&y<w.getMaxHeight()&&w.isChunkLoaded((l.getBlockX()+x)>>4,(l.getBlockZ()+z)>>4))diving.add(w.getBlockAt(l.getBlockX()+x,y,l.getBlockZ()+z));
+                continue;
+            }
+            if(!water&&!lava)continue;
+            int y=(int)Math.floor(l.getY()-.05);
+            if(y<w.getMinHeight()||y>=w.getMaxHeight()-1)continue;
+            Block center=w.getBlockAt(l.getBlockX(),y,l.getBlockZ()); Material liquid=originalType(center);
+            if((liquid==Material.WATER&&water||liquid==Material.LAVA&&lava)&&center.getRelative(0,1,0).getType().isAir()&&l.getY()<y+.96){
+                // Rise the last fraction of a block before creating a collision surface.
+                if(l.getY()>=y+.35&&p.getEyeLocation().getY()>y+1&&p.getVelocity().getY()>=-.12){Vector v=p.getVelocity();v.setY(Math.max(.18,v.getY()));p.setVelocity(v);p.setFallDistance(0);}
+                continue;
+            }
+            if(l.getY()<y+.96 || l.getY()>y+1.35)continue;
+            for(int x=-1;x<=1;x++)for(int z=-1;z<=1;z++){
+                int bx=l.getBlockX()+x,bz=l.getBlockZ()+z;if(!w.isChunkLoaded(bx>>4,bz>>4))continue;
+                Block block=w.getBlockAt(bx,y,bz);Material type=originalType(block);
+                if(!block.getRelative(0,1,0).getType().isAir())continue;
+                if(type==Material.WATER&&water)wanted.put(block,Material.PACKED_ICE);
+                if(type==Material.LAVA&&lava)wanted.put(block,Material.BLACKSTONE);
+            }
+        }
+        // Do not create solid blocks inside any player's body, including swimmers.
+        for(Player p:Bukkit.getOnlinePlayers()){
+            if(p.isDead()||p.getGameMode()==GameMode.SPECTATOR)continue;
+            var bb=p.getBoundingBox();World w=p.getWorld();
+            wanted.keySet().removeIf(block->block.getWorld().equals(w)&&bb.getMinX()<block.getX()+1&&bb.getMaxX()>block.getX()&&bb.getMinZ()<block.getZ()+1&&bb.getMaxZ()>block.getZ()&&bb.getMinY()<block.getY()+.96&&bb.getMaxY()>block.getY());
+        }
+        wanted.keySet().removeAll(diving);
+        for(var entry:new ArrayList<>(surfaces.entrySet()))if(wanted.get(entry.getKey())!=entry.getValue().replacement())restore(entry.getKey(),entry.getValue());
+        for(var entry:wanted.entrySet()){
+            Block block=entry.getKey();Material replacement=entry.getValue();if(surfaces.containsKey(block))continue;
+            if(block.getType()!=Material.WATER&&block.getType()!=Material.LAVA)continue;
+            var event=new org.bukkit.event.block.BlockFormEvent(block,block.getState());event.getNewState().setType(replacement);Bukkit.getPluginManager().callEvent(event);if(event.isCancelled())continue;
+            surfaces.put(block,new Surface(block.getBlockData().clone(),replacement));block.setType(replacement,false);
         }
     }
-    @EventHandler(ignoreCancelled=true) public void onMove(PlayerMoveEvent e){
-        Player p=e.getPlayer();
-        if(activeUntil(waterWalkUntil,p)){
-            makeSurface(p,Material.WATER,Material.FROSTED_ICE);
-            if(random.nextInt(3)==0) fx(p.getLocation().add(0,.15,0),Particle.BUBBLE,6);
-        }
-        if(activeUntil(lavaWalkUntil,p)){
-            makeSurface(p,Material.LAVA,Material.BLACKSTONE);
-            if(random.nextInt(3)==0) fx(p.getLocation().add(0,.15,0),Particle.FLAME,6);
-        }
-    }
-    public void shutdown(){visuals.shutdown();for(Arrow a:arrows)a.remove();arrows.clear();}
+    private void restore(Block b,Surface s){if(b.getType()==s.replacement())b.setBlockData(s.original(),false);surfaces.remove(b);}
+    @EventHandler(ignoreCancelled=true) public void protectSurface(org.bukkit.event.block.BlockBreakEvent e){if(surfaces.containsKey(e.getBlock()))e.setCancelled(true);}
+    @EventHandler(ignoreCancelled=true) public void protectSurfacePiston(org.bukkit.event.block.BlockPistonExtendEvent e){if(e.getBlocks().stream().anyMatch(surfaces::containsKey))e.setCancelled(true);}
+    @EventHandler(ignoreCancelled=true) public void protectSurfaceRetract(org.bukkit.event.block.BlockPistonRetractEvent e){if(e.getBlocks().stream().anyMatch(surfaces::containsKey))e.setCancelled(true);}
+    @EventHandler(ignoreCancelled=true) public void protectSurfaceExplosion(org.bukkit.event.entity.EntityExplodeEvent e){e.blockList().removeIf(surfaces::containsKey);}
+    @EventHandler(ignoreCancelled=true) public void protectSurfaceBlockExplosion(org.bukkit.event.block.BlockExplodeEvent e){e.blockList().removeIf(surfaces::containsKey);}
+    public void shutdown(){for(var e:new ArrayList<>(surfaces.entrySet()))restore(e.getKey(),e.getValue());visuals.shutdown();for(Arrow a:arrows)a.remove();arrows.clear();}
     private void activate(Player p,Shard s,int slot){
+        if(slot==2&&Set.of("water","fire").contains(s.key()))return;
         boolean ult=slot==1;
         if(s.key().equals("totem") && slot==0)return;
         if(!plugin.getConfig().getBoolean("abilities."+s.key()+".slot-"+(slot+1)+".enabled",true))return;
@@ -110,8 +142,9 @@ public final class ShardAbilities implements Listener {
         t[slot]=now+1000L*Math.max(1,seconds); Location l=p.getLocation();World w=p.getWorld();
         p.sendActionBar(Component.text(s.name()+" • "+manager.text(slot==2?"special":ult?"ultimate":"active")));w.playSound(l,"minecraft:block.amethyst_block.chime",1f,1f);
         int visualTicks=20* Math.max(1,Math.min(30,plugin.getConfig().getInt("abilities."+s.key()+".slot-"+(slot+1)+".duration",slot==1?8:slot==2?5:6)));
+        if(Set.of("water","fire").contains(s.key())) visualTicks=slot==0?50:slot==1?100:600;
         visuals.play(p,s.key(),slot,visualTicks);
-        if(plugin.getConfig().isConfigurationSection("abilities."+s.key()+".slot-"+(slot+1))){configured(p,s,slot);return;}
+        if(!Set.of("water","fire").contains(s.key())&&plugin.getConfig().isConfigurationSection("abilities."+s.key()+".slot-"+(slot+1))){configured(p,s,slot);return;}
         if(slot==2){thirdAbility(p,s,l,w);return;}
         switch(s.key()){
             case "strength" -> {if(!ult){effect(p,PotionEffectType.STRENGTH,160,1);animate(p,w,8,3,i->ring(p.getLocation(),Particle.CRIT,1.2,1,16,i));}else{animate(p,w,10,2,i->ring(l,Particle.CRIT,.5+i*.55,.4,24,i));for(var e:targets(p,l,5)){e.damage(4,p);push(e,l,1.1,.45);}}}
@@ -139,10 +172,11 @@ public final class ShardAbilities implements Listener {
             case "water" -> {
                 if(!ult){
                     Vector dir=l.getDirection().setY(0); if(dir.lengthSquared()>.001) dir.normalize();
-                    animate(p,w,22,2,i->{
-                        Location crest=l.clone().add(dir.clone().multiply(1.1+i*.28));
-                        for(int h=0;h<4;h++) ring(crest,Particle.SPLASH,1.2+h*.36,.25+h*.35,24,i*.22);
-                        if(i%3==0) for(var e:targets(p,crest,3.2)){ push(e,crest,1.05,.28); }
+                    Set<UUID> hit=new HashSet<>();
+                    animate(p,w,25,2,i->{
+                        if(i<4)return; Location crest=l.clone().add(dir.clone().multiply((i-4)*.43));
+                        for(var e:targets(p,crest,3.4))if(hit.add(e.getUniqueId()))e.setVelocity(dir.clone().multiply(1.25).setY(.28));
+                        for(int j=-5;j<=5;j++){Vector side=new Vector(dir.getZ(),0,-dir.getX());Location spray=crest.clone().add(side.multiply(j*.55)).add(0,1.2,0);spray.getWorld().spawnParticle(Particle.SPLASH,spray,2,.1,.35,.1,0);}
                     });
                 }else{
                     Location c=forward(p,3);
@@ -165,24 +199,6 @@ public final class ShardAbilities implements Listener {
             case "arsenal" -> {effect(p,PotionEffectType.SPEED,120,1);animate(p,w,12,5,i->ring(p.getLocation(),Particle.WAX_ON,1.3,1,16,i*.4));}
             case "glitched" -> {effect(p,PotionEffectType.INVISIBILITY,120,0);animate(p,w,12,5,i->ring(p.getLocation(),Particle.PORTAL,1.2,1,16,i*.5));}
             case "soul" -> {effect(p,PotionEffectType.REGENERATION,120,1);animate(p,w,24,5,i->ring(p.getLocation(),Particle.SOUL_FIRE_FLAME,1.5,1,16,i*.4));}
-            case "fire" -> {
-                enableLavaWalk(p,30);
-                animate(p,w,40,2,i->{
-                    Location c=p.getLocation();
-                    ring(c,Particle.FLAME,1.15,.15,18,i*.45);
-                    ring(c,Particle.LAVA,1.65,.05,12,-i*.25);
-                    if(i%2==0) fx(c.clone().add(0,.2,0),Particle.ASH,8);
-                });
-            }
-            case "water" -> {
-                enableWaterWalk(p,30);
-                animate(p,w,40,2,i->{
-                    Location c=p.getLocation();
-                    ring(c,Particle.SPLASH,1.2,.15,20,i*.35);
-                    ring(c,Particle.BUBBLE,1.7,.05,12,-i*.22);
-                    if(i%2==0) fx(c.clone().add(0,.2,0),Particle.BUBBLE_COLUMN_UP,6);
-                });
-            }
             case "speed" -> {Vector v=l.getDirection().setY(0);if(v.lengthSquared()>.001)v.normalize().multiply(1.4);p.setVelocity(v.setY(.25));animate(p,w,10,2,i->fx(p.getLocation(),Particle.ELECTRIC_SPARK,15));}
             case "air" -> {animate(p,w,12,3,i->ring(l,Particle.CLOUD,.5+i*.4,.7,24,i*.4));for(var e:targets(p,l,5))push(e,l,1.2,.25);}
             case "health" -> {for(Player q:w.getPlayers())if(ally(p,q)&&q.getLocation().distanceSquared(l)<=25)effect(q,PotionEffectType.ABSORPTION,300,0);animate(p,w,15,4,i->ring(l,Particle.HEART,4,.5,12,i*.3));}

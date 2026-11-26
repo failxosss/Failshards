@@ -40,7 +40,7 @@ public final class ModelEffects implements Listener {
         if(!file.exists()) plugin.saveResource("scenes-v7.yml",false);
         YamlConfiguration y=YamlConfiguration.loadConfiguration(file);
         try(var in=plugin.getResource("scenes-v7.yml")) {
-            if(in!=null)y.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(in,StandardCharsets.UTF_8)));
+            if(in!=null){var defaults=YamlConfiguration.loadConfiguration(new InputStreamReader(in,StandardCharsets.UTF_8)); y.setDefaults(defaults); for(String k:List.of("water_1","water_2","water_3","fire_1","fire_2","fire_3")) y.set("scenes."+k,defaults.get("scenes."+k));}
         } catch(IOException ex){plugin.getLogger().warning(ex.toString());}
         var section=y.getConfigurationSection("scenes");
         if(section!=null) for(String key:section.getKeys(false)) {
@@ -79,7 +79,7 @@ public final class ModelEffects implements Listener {
         double size=Math.max(.2,Math.min(2,plugin.getConfig().getDouble(local+"scale",1)));
         double speed=Math.max(.25,Math.min(4,plugin.getConfig().getDouble(local+"speed",1)));
         int duration=Math.max(10,Math.min(600,(int)(plugin.getConfig().getInt(local+"ticks",ticks)/speed)));
-        if(betterModel.play(player,key+"_"+(slot+1),recipe.follow,duration)){if(plugin.getConfig().getBoolean("visual-effects.scene-sounds",true))player.getWorld().playSound(player.getLocation(),"minecraft:"+recipe.sound,.7f,1f);return;}
+        if(!Set.of("water","fire").contains(key)&&betterModel.play(player,key+"_"+(slot+1),recipe.follow,duration)){if(plugin.getConfig().getBoolean("visual-effects.scene-sounds",true))player.getWorld().playSound(player.getLocation(),"minecraft:"+recipe.sound,.7f,1f);return;}
         List<ItemStack> items=new ArrayList<>();
         for(Track track:recipe.tracks){ItemStack item=manager.visualItem("failshards:"+track.asset);if(item==null){if(warned.add(track.asset))plugin.getLogger().warning("Missing scene model: "+track.asset);return;}items.add(item);}
         Scene s=new Scene(player,recipe,duration,size);active.put(player.getUniqueId(),s);

@@ -1,1 +1,0 @@
-90 procedural cuboid meshes, one per ability. Existing motion profiles and gameplay retained; fixed 3D displays replace flat symbols. Per-profile spin, stretch (uniform pulse) and phase. Ground circles only for selected area effects. No rigged animation, shaders or in-game verification. Back up and replace visual-profiles.yml to use new defaults. Build via Maven/GitHub Actions.
