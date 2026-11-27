@@ -1,3 +1,8 @@
+secret-totem-recipe:
+  enabled: true
+pvp-hearts:
+  enabled: true
+  minimum-hearts: 1
 language: en
 prevent-shard-drop: true
 mode: INVENTORY
@@ -172,24 +177,40 @@ abilities:
     third-cooldown: 90
   fire:
     enabled: true
-    active-cooldown: 40
-    ultimate-cooldown: 130
-    surface-walk: true
+    ignite-ground: true
+    active-cooldown: 30
+    ultimate-cooldown: 30
+    # Damage is in health points: 2 = one heart. Once per target per cast.
     slot-1:
+      enabled: true
       duration: 8
+      damage: 8.0
+      burn-seconds: 5
+      knockback: 0.45
     slot-2:
+      enabled: true
       duration: 10
+      damage: 10.0
+      burn-seconds: 6
     slot-3:
       enabled: false
   water:
     enabled: true
-    active-cooldown: 40
-    ultimate-cooldown: 130
-    surface-walk: true
+    wash-blocks: true
+    active-cooldown: 30
+    ultimate-cooldown: 30
     slot-1:
+      enabled: true
       duration: 8
+      damage: 8.0
+      knockback: 1.25
     slot-2:
+      enabled: true
       duration: 10
+      damage: 10.0
+      knockback: 0.35
+      slow-seconds: 2.5
+      slow-amplifier: 1
     slot-3:
       enabled: false
   speed:

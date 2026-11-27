@@ -1,0 +1,1 @@
+FailShards v21: Fire and Water active and ultimate cooldown defaults are 30 seconds each. Existing server configs are preserved: edit abilities.fire and abilities.water active-cooldown and ultimate-cooldown to 30, then run /failshards reload. Other gameplay and assets unchanged.

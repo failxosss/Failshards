@@ -1,0 +1,1 @@
+Fire Burst places actual Minecraft FIRE on exposed solid ground within its expanding footprint. Honors cancelled BlockIgniteEvent, skips unloaded chunks. Vanilla fire spread and lifetime depend on world settings. abilities.fire.ignite-ground defaults to true. No resource pack changes. Build with GitHub Actions. Not compiled or tested in game.

@@ -1,0 +1,1 @@
+Damage settings: abilities.fire/water.slot-1/slot-2.damage (2 HP = 1 heart). Direct damage once per target per cast, normal armor and damage events apply. Fire burn-seconds, water knockback and vortex slow settings configurable. Merge new keys into existing config.yml. Build new JAR. Existing fire trail, wash, controls and PvP hearts preserved. Not compiled or tested on server.

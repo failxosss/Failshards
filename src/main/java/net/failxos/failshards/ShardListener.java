@@ -3,6 +3,9 @@ package net.failxos.failshards;
 import java.util.Iterator;
 import java.util.Set;
 import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.AttributeInstance;
+import org.bukkit.Registry;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -50,6 +53,51 @@ public final class ShardListener implements Listener {
     public void onQuit(PlayerQuitEvent e) {
         manager.forget(e.getPlayer().getUniqueId());
         manager.clearModifiers(e.getPlayer());
+    }
+
+    private NamespacedKey heartKey() {
+        return new NamespacedKey(plugin, "pvp_base_health");
+    }
+
+    private AttributeInstance healthAttribute(Player p) {
+        var attribute = Registry.ATTRIBUTE.get(NamespacedKey.minecraft("max_health"));
+        return attribute == null ? null : p.getAttribute(attribute);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onPvpHeartLoss(PlayerDeathEvent e) {
+        if (!plugin.getConfig().getBoolean("pvp-hearts.enabled", true)) return;
+        Player victim = e.getEntity();
+        if (!(e.getDamageSource().getCausingEntity() instanceof Player killer)
+                || killer.getUniqueId().equals(victim.getUniqueId())) return;
+        AttributeInstance health = healthAttribute(victim);
+        if (health == null) return;
+        double minimum = Math.max(1, Math.min(10, plugin.getConfig().getInt("pvp-hearts.minimum-hearts", 1))) * 2.0;
+        double current = health.getBaseValue();
+        double next = Math.min(current, Math.max(minimum, current - 2.0));
+        if (next >= current) return;
+        victim.getPersistentDataContainer().set(heartKey(), PersistentDataType.DOUBLE, next);
+    }
+
+    private void restoreHeartCount(Player p) {
+        Double saved = p.getPersistentDataContainer().get(heartKey(), PersistentDataType.DOUBLE);
+        AttributeInstance health = healthAttribute(p);
+        if (saved == null || health == null) return;
+        health.setBaseValue(saved);
+        if (!p.isDead() && p.getHealth() > health.getValue()) p.setHealth(health.getValue());
+    }
+
+    @EventHandler
+    public void onHeartJoin(PlayerJoinEvent e) {
+        restoreHeartCount(e.getPlayer());
+    }
+
+    @EventHandler
+    public void onHeartRespawn(PlayerRespawnEvent e) {
+        Player p = e.getPlayer();
+        plugin.getServer().getScheduler().runTask(plugin, () -> {
+            if (p.isOnline()) restoreHeartCount(p);
+        });
     }
 
     /** Keep shards on death; other items drop. */

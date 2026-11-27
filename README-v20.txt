@@ -1,0 +1,1 @@
+Fire Burst: moving ground-fire footprint, approximately 10 blocks forward, up to 6.8 blocks wide. Existing fire ignition setting and cancellation events retained. Short grass, fern and dead bush may be cleared with a cancellable break event. Fire follows vanilla physics. No resource pack changes. Not compiled or game-tested.

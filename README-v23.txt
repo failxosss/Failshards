@@ -1,0 +1,1 @@
+v23: Secret Totem Shard shaped crafting recipe. TAT/AEA/TAT (T=Totem of Undying, A=Enchanted Golden Apple, E=Dragon Egg). Recipe discovery cancelled. Config: secret-totem-recipe.enabled. Requires a new JAR; no resource pack changes. Not compiled or tested in game.

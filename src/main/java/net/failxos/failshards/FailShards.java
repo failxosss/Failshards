@@ -7,6 +7,8 @@ public final class FailShards extends JavaPlugin {
 
     private ShardManager manager;
     private ShardAbilities abilities;
+    private SecretTotemRecipe secretRecipe;
+    private ElementRecipes elementRecipes;
 
     @Override
     public void onEnable() {
@@ -32,11 +34,17 @@ public final class FailShards extends JavaPlugin {
             if (args.length != 0) return false;
             return manager.changeShard(player);
         });
+        secretRecipe = new SecretTotemRecipe(this, manager);
+        secretRecipe.register();
+        elementRecipes = new ElementRecipes(this, manager);
+        elementRecipes.register();
         manager.startTask();
     }
 
     @Override
     public void onDisable() {
+        if (elementRecipes != null) elementRecipes.unregister();
+        if (secretRecipe != null) secretRecipe.unregister();
         if (abilities != null) abilities.shutdown();
         if (manager != null) {
             manager.shutdown();
