@@ -27,7 +27,7 @@ public final class ElementRecipes implements Listener {
     public void register() {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         retry = plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
-            add("water", Material.GREEN_DYE, Material.WATER_BUCKET, Material.HEART_OF_THE_SEA, PotionType.LONG_WATER_BREATHING);
+            add("water", Material.TURTLE_SCUTE, Material.WATER_BUCKET, Material.HEART_OF_THE_SEA, PotionType.LONG_WATER_BREATHING);
             add("fire", Material.NETHERITE_INGOT, Material.MAGMA_CREAM, Material.LAVA_BUCKET, PotionType.LONG_FIRE_RESISTANCE);
             if (registered.size() == 2 && retry != null) retry.cancel();
         }, 20L, 40L);
